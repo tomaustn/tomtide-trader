@@ -2,8 +2,8 @@ import math
 import os
 import pandas as pd
 
-filePath = os.listdir("compiledMonthlyData")
-testdata = pd.read_csv("compiledMonthlyData/"+filePath[0])
+filePath = os.listdir("pastdata")
+testdata = pd.read_csv("pastdata/"+filePath[0])
 
 def resourceData(resource: str, df: pd.DataFrame) -> pd.DataFrame: # get data for a specific resource
     return df[df['resource'] == resource] #food - 166163 cells
@@ -52,10 +52,11 @@ def printStats(resource: str, df: pd.DataFrame) -> None:
     print(f"Mean: {mean}")
     print(f"Standard Deviation: {std}")
     print(f"Simple Moving Average: {sma(resource, 5, df)}")
-    # print(f"Bollinger Bands: {bollingerBands(resource, 5, df)}")
-    # print(f"Relative Strength Index: {rsi(resource, 5, df)}")
+    print(f"Bollinger Bands: {bollingerBands(resource, 5, df)}")
+    print(f"Relative Strength Index: {rsi(resource, 5, df)}")
 
 # #print amount of rows in food
 # print((resourceData("food", testdata)).shape[0])
 
-print(testdata.columns.to_list)
+print(printStats("food", testdata))
+# print(testdata.columns.to_list)
